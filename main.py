@@ -1,8 +1,7 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
-from aiohttp import web
+from aiogram.client.session.aiohttp import AiohttpSession
 from config import TELEGRAM_TOKEN
 
 # Импорт роутеров
@@ -19,7 +18,9 @@ from modules.web_tools import router as web_router
 logging.basicConfig(level=logging.INFO)
 
 async def main():
-    bot = Bot(token=TELEGRAM_TOKEN)
+    # Настройка правильного прокси для PythonAnywhere
+    session = AiohttpSession(proxy="http://proxy-server.pythonanywhere.com:3128")
+    bot = Bot(token=TELEGRAM_TOKEN, session=session)
     dp = Dispatcher()
 
     # Подключение роутеров
