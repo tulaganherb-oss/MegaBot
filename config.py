@@ -1,0 +1,6 @@
+# Конфигурация супер-бота
+TELEGRAM_TOKEN = "8852428203:AAFi5OCOFIGHxFONNwsQsJhNTAVBin7zr1M"
+OPENROUTER_API_KEY = (
+    "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"
+)
+AI_MODEL = "openai/gpt-4o-mini"
