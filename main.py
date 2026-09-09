@@ -1,6 +1,8 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
+from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
+from aiohttp import web
 from config import TELEGRAM_TOKEN
 
 # Импорт роутеров
@@ -16,12 +18,8 @@ from modules.web_tools import router as web_router
 
 logging.basicConfig(level=logging.INFO)
 
-
 async def main():
-    from aiogram.client.session.aiohttp import AiohttpSession
-
-    session = AiohttpSession(proxy="http://proxy.server:3128")
-    bot = Bot(token=TELEGRAM_TOKEN, session=session)
+    bot = Bot(token=TELEGRAM_TOKEN)
     dp = Dispatcher()
 
     # Подключение роутеров
@@ -37,7 +35,6 @@ async def main():
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
-
 
 if __name__ == "__main__":
     asyncio.run(main())
