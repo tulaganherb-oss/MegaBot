@@ -18,7 +18,10 @@ logging.basicConfig(level=logging.INFO)
 
 
 async def main():
-  bot = Bot(token=TELEGRAM_TOKEN)
+  from aiogram.client.session.aiohttp import AiohttpSession
+
+session = AiohttpSession(proxy="http://proxy.server:3128")
+bot = Bot(token=TELEGRAM_TOKEN, session=session)
   dp = Dispatcher()
 
   # Подключение роутеров
